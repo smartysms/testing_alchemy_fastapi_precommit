@@ -25,7 +25,6 @@ async def hello_world_testing(request):
     return PlainTextResponse("Hello, world!")
 
 
-
 # dummy data dict that holds the value
 class Address(BaseModel):
     city: str
@@ -235,4 +234,3 @@ app.add_route("/test_route", hello_world_testing)
 
 # mount the Starlette application under the "/starlette" path
 # app.mount("/starlette", starlette_app)
-
