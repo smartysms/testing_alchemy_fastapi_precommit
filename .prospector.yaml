@@ -1,0 +1,11 @@
+tool:
+    pyroma: true
+    dodgy: true
+    pep8:
+        ignore:
+            - E501
+    pylint:
+        disable:
+            - R0801
+            - W0511
+            - C0111

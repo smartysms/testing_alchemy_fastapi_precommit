@@ -2,8 +2,13 @@ from typing import List
 
 from fastapi import FastAPI, HTTPException, Depends, Query
 from fastapi.routing import APIRoute
-from fastapi.security import HTTPBearer, HTTPBasic, HTTPBasicCredentials, HTTPAuthorizationCredentials, \
-    OAuth2PasswordBearer
+from fastapi.security import (
+    HTTPBearer,
+    HTTPBasic,
+    HTTPBasicCredentials,
+    HTTPAuthorizationCredentials,
+    OAuth2PasswordBearer,
+)
 import jwt
 from pydantic import BaseModel
 from starlette.responses import PlainTextResponse, JSONResponse
@@ -55,12 +60,8 @@ class User3(BaseModel):
 
 security = HTTPBearer()
 
-user_validate_dict = {
-    'user1': '123'
-}
-items = {
-    1: {"id": 1, "name": "testing_name"}
-}
+user_validate_dict = {"user1": "123"}
+items = {1: {"id": 1, "name": "testing_name"}}
 
 
 class Item(BaseModel):
@@ -78,7 +79,7 @@ def get_item(id: int):
 @app.get("/get_endpoint", response_model=dict)
 async def test_get(key: str = ""):
     print(dir(app))
-    print(app.on_event())
+
     # print(dir(app))
     # print(">>")
     # cred: HTTPAuthorizationCredentials = Depends(security)
@@ -109,9 +110,7 @@ async def test_post(data: dict):
 async def test_post(payload: dict):
     encoded_jwt = jwt.encode(payload, "secret", algorithm="HS256")
     # jwt.ExpiredSignatureError
-    return {
-        "data": encoded_jwt
-    }
+    return {"data": encoded_jwt}
 
 
 @app.on_event("startup")
@@ -143,7 +142,7 @@ async def testing_api_route():
         200: {"description": "Successful Response", "model": Item},
         404: {"description": "Item not found1"},
     },
-    operation_id="getting_the_item"
+    operation_id="getting_the_item",
 )
 async def read_item(item_id: int):
     item = get_item(item_id)
@@ -181,7 +180,6 @@ async def read_items():
 # app.add_api_route("/", my_handler, response_class=JSONResponse)
 
 
-
 @app.get("/users/{user_id}", response_model_exclude_unset=True)
 async def read_user(user_id: int):
     return {"id": user_id, "name": "John Doe"}
@@ -189,8 +187,8 @@ async def read_user(user_id: int):
 
 @app.get("/hello", response_class=PlainTextResponse)
 async def hello_world():
-
     return "Hello, world!"
+
 
 # custom_route = APIRoute("/route_add", endpoint=hello_world, methods=["GET"])
 # print(**custom_route.__dict__)

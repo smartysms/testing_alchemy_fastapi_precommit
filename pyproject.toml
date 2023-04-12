@@ -12,6 +12,8 @@ sqlalchemy = "^2.0.8"
 uvicorn = "^0.21.1"
 pyjwt = "^2.6.0"
 pre-commit = "^3.2.2"
+prospector2html = "^2.0.0"
+black = "^23.3.0"
 
 
 [build-system]
